@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="LIS.App/LIS.App.csproj" />
+  <Project Path="LIS.Tests/LIS.Tests.csproj" />
+</Solution>
