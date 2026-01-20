@@ -8,10 +8,21 @@ namespace LIS.App
     {
         public static string Find(string input)
         {
+           
+            if (string.IsNullOrWhiteSpace(input))
+                return string.Empty;
+
             var numbers = input
                 .Split(' ', StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
                 .ToArray();
+
+          
+            if (numbers.Length == 0)
+                return string.Empty;
+
+            if (numbers.Length == 1)
+                return numbers[0].ToString();
 
             int n = numbers.Length;
             var dp = new int[n];
@@ -23,7 +34,7 @@ namespace LIS.App
             int maxLength = 1;
             int endIndex = 0;
 
-            for (int i = 0; i < n; i++)
+            for (int i = 1; i < n; i++)
             {
                 for (int j = 0; j < i; j++)
                 {
@@ -34,6 +45,7 @@ namespace LIS.App
                     }
                 }
 
+                // earliest sequence preserved
                 if (dp[i] > maxLength)
                 {
                     maxLength = dp[i];
@@ -41,15 +53,15 @@ namespace LIS.App
                 }
             }
 
-            var result = new List<int>();
+            var lis = new List<int>();
             while (endIndex != -1)
             {
-                result.Add(numbers[endIndex]);
+                lis.Add(numbers[endIndex]);
                 endIndex = prev[endIndex];
             }
 
-            result.Reverse();
-            return string.Join(" ", result);
+            lis.Reverse();
+            return string.Join(" ", lis);
         }
     }
 }

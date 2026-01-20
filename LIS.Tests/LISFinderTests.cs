@@ -20,5 +20,20 @@ namespace LIS.Tests
             var result = LISFinder.Find(input);
             Assert.Equal("1710 2461 9288 10195 10431 12485", result);
         }
+        [Fact]
+        public void EmptyInput_ReturnsEmptySequence()
+        {
+            var result = LISFinder.Find("");
+
+            Assert.Equal(string.Empty, result);
+        }
+
+        [Fact]
+        public void SingleNumber_ReturnsThatNumber()
+        {
+            var result = LISFinder.Find("42");
+
+            Assert.Equal("42", result);
+        }
     }
 }
